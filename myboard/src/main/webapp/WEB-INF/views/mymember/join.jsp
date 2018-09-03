@@ -50,7 +50,7 @@
 				<td align="center" colspan="3">
 					<p></p> 
 					<input type="submit" value="회원가입" class="btn btn-warning" />
-					<input type="button" value="메인으로" class="btn btn-success" onclick="javascript:window.location='/'">
+					<input type="button" value="메인으로" class="btn btn-success" onclick="javascript:window.location='../'">
 					<p></p>
 				</td>
 			</tr>
@@ -94,13 +94,13 @@ function confirmId(){
 
 // 이미지 출력
 var img = document.getElementById("img");
-var image = document.getElementById("profile_img");
+var profile_img = document.getElementById("profile_img");
 	
 // 선택한 파일 이름을 저장할 변수
 var filename = "";
 
 // image에서 선택이 변경되었을 때 호출되는 함수
-image.addEventListener("change", function(){
+profile_img.addEventListener("change", function(){
 	readURL(this);
 });
 

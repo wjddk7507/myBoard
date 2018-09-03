@@ -32,7 +32,7 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 
 	<div class="wrapper" style="margin-left:30px;margin-top:10px">
 		<header>
-			<a href="#" style="color:#EECCEE"><h1>MyBoard</h1></a>
+			<a href="${pageContext.request.contextPath}" style="color:#EECCEE"><h1>MyBoard</h1></a>
 		</header>
 	</div>
 	<div class="ui top attached secondary menu">
@@ -42,7 +42,15 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 		      <input type="text" placeholder="Search...">
 		      <div class="ui button">Go</div>
 		    </div>
-		    <a class="ui item">Login</a>
+		    <c:if test="${member==null}">
+				<a class="ui item" href="${pageContext.request.contextPath}/mymember/login">Login</a>
+				<a class="ui item" href="${pageContext.request.contextPath}/mymember/join">Join</a>
+			</c:if>
+				
+			<c:if test="${member!=null}">
+				<a class="ui item" href="${pageContext.request.contextPath}/mymember/logout">Logout</a>
+			</c:if>
+			
 		  </div>
 	</div>
 	

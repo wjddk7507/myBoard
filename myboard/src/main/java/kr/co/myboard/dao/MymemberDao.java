@@ -17,6 +17,10 @@ public class MymemberDao {
 	}
 	// 회원 가입을 위한 메소드
 	public void join(Mymember mymember) {
-		sqlSession.insert("mymembmer.join", mymember);
+		sqlSession.insert("mymember.join", mymember);
+	}
+	// 로그인 처리를 위한 메소드
+	public Mymember login(String id) {
+		return sqlSession.selectOne("mymember.login", id);
 	}
 }

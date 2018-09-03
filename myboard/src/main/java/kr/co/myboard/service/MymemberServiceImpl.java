@@ -32,17 +32,18 @@ public class MymemberServiceImpl implements MymemberService {
 		String nickname = request.getParameter("nickname");
 		// 파일
 		MultipartFile profile_img = request.getFile("profile_img");
+		
 		// 파일을 저장할 경로 만들기 // 파일은 절대경로로만 저장이 가능
 		// 프로젝트 내의 userimage 디렉토리의 절대 경로를 만들기
 		String uploadPath = request.getRealPath("/profile");
 		// 랜덤한 64자리의 문자열 만들기
 		UUID uid = UUID.randomUUID();
 		// 원본 파일이름 가져오기
-		System.out.println(profile_img);
 		String filename = profile_img.getOriginalFilename();
 		filename = uid+"_"+filename;
 		// 업로드할 파일의 실제 경로 만들기
 		String filepath = uploadPath+"\\"+filename;
+		//System.out.println("실제 저장 경로 : "+filepath);
 			
 		// Dao의 파라미터로 사용할 객체
 		Mymember mymember = new Mymember();
@@ -61,5 +62,23 @@ public class MymemberServiceImpl implements MymemberService {
 			System.out.println("회원가입 실패 : "+e.getMessage());
 		}
 
+	}
+
+	@Override
+	public Mymember login(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		Mymember member= memberDao.login(id);
+		if(member != null) {
+			// 비밀번호가 일치하면
+			if(BCrypt.checkpw(pw, member.getPw()) == true) {
+				// 비밀번호만 초기화
+				member.setPw("");
+			} else {
+				// 비밀번호가 일치하지 않으면 전부 초기화
+				member = null;
+			}
+		}		
+		return member;
 	}
 }
