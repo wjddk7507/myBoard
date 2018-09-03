@@ -7,22 +7,32 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
-	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Spring 프로젝트에서 MVC 관련 어노테이션을 사용할 수 있도록 해주는 설정 -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- 정적인 파일들을 캐싱해줄 수 있는 디렉토리와 url 설정 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- Controller에서 forwarding 할 때 사용하는 뷰 이름과 조합해서 실제 출력될
+	파일의 위치와 종류(JSTL View)를 결정하는 설정 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 어노테이션이 적용된 클래스의 객체를 자동으로 만들어주는 패키지 설정
+	스프링 MVC 프로젝트에서 모든 클래스는 이 패키지 안에서 생성
+	domain 클래스를 제외하고는 전부 어노테이션을 이용해서 생성 
+	이 패키지에 있는 클래스들은 new하지 않고 bean을 생성하지도 않는다-->
 	<context:component-scan base-package="kr.co.myboard" />
 	
+	<!-- Controller가 처리하지 못하는 요청을 WAS가 처리하도록 하는 설정 -->
+	<default-servlet-handler/>
 	
+	<!-- 파일 업로드 처리를 위한 bean -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<beans:property value="10485760" name="maxUploadSize" />
+	</beans:bean>
 	
 </beans:beans>

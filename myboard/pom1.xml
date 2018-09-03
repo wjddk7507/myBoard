@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kr.co</groupId>
-	<artifactId>myboard</artifactId>
-	<name>myboard</name>
+	<artifactId>pk</artifactId>
+	<name>springboard</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -13,6 +14,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+
 	<!-- Maven 중앙 저장소 이외의 곳에서 라이브러리를 가져와야 할 때 사용하는 설정 오라클은 Maven의 중앙 저장소에 라이브러리가 
 		없습니다. 전자정부 프레임워크나 삼성의 애니프레임워크는 이 설정이 이미 되어 있습니다. -->
 	<repositories>
