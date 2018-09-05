@@ -20,28 +20,28 @@ import kr.co.myboard.service.MemberService;
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memberservice;
+	MemberService memberService;
 	
-	@RequestMapping(value = "mymember/join", method = RequestMethod.GET)
+	@RequestMapping(value = "member/join", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {		
-		return "mymember/join";
+		return "member/join";
 	}
 
-	@RequestMapping(value = "mymember/join", method = RequestMethod.POST)
+	@RequestMapping(value = "member/join", method = RequestMethod.POST)
 	public String join(MultipartHttpServletRequest request, RedirectAttributes attr) {
-		memberservice.join(request);
+		memberService.join(request);
 		attr.addFlashAttribute("msg","회원가입");
 		// 삽입, 삭제, 갱신 다음에는 리다이렉트로 이동
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "mymember/login", method = RequestMethod.GET)
+	@RequestMapping(value = "member/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {		
-		return "mymember/login";
+		return "member/login";
 	}
-	@RequestMapping(value = "mymember/login", method = RequestMethod.POST)
+	@RequestMapping(value = "member/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, Model model, RedirectAttributes attr, HttpSession session) {	
-		Member member = memberservice.login(request);
+		Member member = memberService.login(request);
 		//로그인에 실패한 경우
 		if(member == null) {
 			attr.addFlashAttribute("msg", "없는 이메일이거나 잘못된 비밀번호 입니다.");

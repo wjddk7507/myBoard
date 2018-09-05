@@ -37,18 +37,20 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 	</div>
 	<div class="ui top attached secondary menu">
 		<a class="item" id="menuBtn">Menu</a> 
+		<a class="item" id="menuBtn" href="${pageContext.request.contextPath}/board/list">Board List</a> 
+		<a class="item" id="menuBtn" href="${pageContext.request.contextPath}/board/register">Board 만들기</a> 
 		<div class="right menu">
 		    <div class="ui action input">
 		      <input type="text" placeholder="Search...">
 		      <div class="ui button">Go</div>
 		    </div>
 		    <c:if test="${member==null}">
-				<a class="ui item" href="${pageContext.request.contextPath}/mymember/login">Login</a>
-				<a class="ui item" href="${pageContext.request.contextPath}/mymember/join">Join</a>
+				<a class="ui item" href="${pageContext.request.contextPath}/member/login">Login</a>
+				<a class="ui item" href="${pageContext.request.contextPath}/member/join">Join</a>
 			</c:if>
 				
 			<c:if test="${member!=null}">
-				<a class="ui item" href="${pageContext.request.contextPath}/mymember/logout">Logout</a>
+				<a class="ui item" href="${pageContext.request.contextPath}/member/logout">Logout</a>
 			</c:if>
 			
 		  </div>
@@ -62,7 +64,7 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 				 
 				<div class="item" style="text-align:center">	
 					<c:if test="${member==null}">
-						<a href="${pageContext.request.contextPath}/mymember/login">로그인</a>
+						<a href="${pageContext.request.contextPath}/member/login">로그인</a>
 						하셔서 <br/> 참여중인 게시판을 <br/>확인하세요!
 					</c:if>	
 					<c:if test="${member!=null}">
@@ -117,6 +119,6 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 			toggleSidebar();
 		})
 		
-	</script>
+</script>
 </body>
 	
