@@ -10,13 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <!-- 회원가입을 위한 sql -->
-<insert id="join" parameterType="Mymember">
+<insert id="join" parameterType="Member">
 	insert into mymember(id, pw, nickname, profile_img)
 	values(#{id}, #{pw}, #{nickname}, #{profile_img})
 </insert>
 
 <!-- 로그인 처리를 위해서 id를 가지고 모든 정보를 찾아오는 sql -->
-<select id="login" parameterType="java.lang.String" resultType="Mymember">
+<select id="login" parameterType="java.lang.String" resultType="Member">
 	select * from mymember where id=#{id}
 </select>
 </mapper>

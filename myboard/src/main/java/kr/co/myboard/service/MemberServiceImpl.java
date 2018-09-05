@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import kr.co.myboard.dao.MymemberDao;
-import kr.co.myboard.domain.Mymember;
+import kr.co.myboard.dao.MemberDao;
+import kr.co.myboard.domain.Member;
 
 @Service
-public class MymemberServiceImpl implements MymemberService {
+public class MemberServiceImpl implements MemberService {
 	@Autowired
-	private MymemberDao memberDao;
+	private MemberDao memberDao;
 
 	@Override
 	public String idCheck(HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class MymemberServiceImpl implements MymemberService {
 		//System.out.println("실제 저장 경로 : "+filepath);
 			
 		// Dao의 파라미터로 사용할 객체
-		Mymember mymember = new Mymember();
+		Member mymember = new Member();
 		// 업로드할 파일 객체 만들기
 		File f = new File(filepath);
 		try {
@@ -65,10 +65,10 @@ public class MymemberServiceImpl implements MymemberService {
 	}
 
 	@Override
-	public Mymember login(HttpServletRequest request) {
+	public Member login(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		Mymember member= memberDao.login(id);
+		Member member= memberDao.login(id);
 		if(member != null) {
 			// 비밀번호가 일치하면
 			if(BCrypt.checkpw(pw, member.getPw()) == true) {

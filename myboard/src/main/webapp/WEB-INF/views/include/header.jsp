@@ -56,12 +56,21 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 	
 	<div id="app">
 		<div class="ui left vertical labeled sidebar menu">			
-				<a class="item">홈</a> 
-				<a class="item">인기</a> 
-				<a class="item">구독</a> 
-				<a class="item">    </a> 
-				<a class="item"> Messages </a>
+				<a class="item">&nbsp&nbsp&nbsp&nbsp&nbsp홈</a> 
+				<a class="item">&nbsp&nbsp&nbsp&nbsp&nbsp인기</a> 
+				<a class="item">&nbsp&nbsp&nbsp&nbsp&nbsp구독</a>
+				 
+				<div class="item" style="text-align:center">	
+					<c:if test="${member==null}">
+						<a href="${pageContext.request.contextPath}/mymember/login">로그인</a>
+						하셔서 <br/> 참여중인 게시판을 <br/>확인하세요!
+					</c:if>	
+					<c:if test="${member!=null}">
+						${member.nickname}님 환영합니다!
+					</c:if>	
+				</div>
 				
+			<c:if test="${member!=null}">
 				<div class="item">
 			    	참여중인 게시판
 				    <div class="menu">
@@ -85,7 +94,8 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 				      <a class="purple item">Add</a>
 				      <a class="item">Remove</a>
 				    </div>
-				 </div>			
+				 </div>		
+			 </c:if>	
 		</div>
 		<div class="pusher">
 			<%@ include file = "content.jsp"%>

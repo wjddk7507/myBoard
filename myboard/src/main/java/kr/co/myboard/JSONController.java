@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.co.myboard.service.MymemberService;
+import kr.co.myboard.service.MemberService;
 
 @RestController
 public class JSONController {
 	@Autowired
-	private MymemberService memberService;
+	private MemberService memberService;
 	
 	// 아이디 중복 체크 요청을 처리
 	@RequestMapping(value="mymember/idCheck", method=RequestMethod.GET)

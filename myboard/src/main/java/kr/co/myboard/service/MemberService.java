@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import kr.co.myboard.domain.Mymember;
+import kr.co.myboard.domain.Member;
 
-public interface MymemberService {
+public interface MemberService {
 	// email 중복 체크를 위한 메소드
 	// 파라미터는 3가지 
 	// - 파라미터 각각을 파라미터로 만드는 경우 : @RequestParam
@@ -19,5 +19,5 @@ public interface MymemberService {
 	public void join(MultipartHttpServletRequest request);
 
 	// 로그인 처리를 위한 메소드
-	public Mymember login(HttpServletRequest request);
+	public Member login(HttpServletRequest request);
 }

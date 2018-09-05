@@ -2,7 +2,7 @@ package kr.co.myboard.domain;
 
 import java.sql.Date;
 
-public class Mymember {
+public class Member {
 	private String id;
 	private String pw;
 	private String nickname;
@@ -41,7 +41,7 @@ public class Mymember {
 	}
 	@Override
 	public String toString() {
-		return "Mymember [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", join_date=" + join_date
+		return "Member [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", join_date=" + join_date
 				+ ", profile_img=" + profile_img + "]";
 	}
 }

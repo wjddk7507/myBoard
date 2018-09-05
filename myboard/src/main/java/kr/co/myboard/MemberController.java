@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kr.co.myboard.domain.Mymember;
-import kr.co.myboard.service.MymemberService;
+import kr.co.myboard.domain.Member;
+import kr.co.myboard.service.MemberService;
 
 @Controller
-public class MymemberController {
+public class MemberController {
 	@Autowired
-	MymemberService memberservice;
+	MemberService memberservice;
 	
 	@RequestMapping(value = "mymember/join", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {		
@@ -41,7 +41,7 @@ public class MymemberController {
 	}
 	@RequestMapping(value = "mymember/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, Model model, RedirectAttributes attr, HttpSession session) {	
-		Mymember member = memberservice.login(request);
+		Member member = memberservice.login(request);
 		//로그인에 실패한 경우
 		if(member == null) {
 			attr.addFlashAttribute("msg", "없는 이메일이거나 잘못된 비밀번호 입니다.");
