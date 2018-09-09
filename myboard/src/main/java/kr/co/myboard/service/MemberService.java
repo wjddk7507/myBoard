@@ -20,4 +20,7 @@ public interface MemberService {
 
 	// 로그인 처리를 위한 메소드
 	public Member login(HttpServletRequest request);
+	
+	// 메일을 보내는 메소드
+	public void sendmail(HttpServletRequest request);
 }

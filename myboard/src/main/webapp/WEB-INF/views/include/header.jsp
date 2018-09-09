@@ -137,7 +137,10 @@ html.open #sidebar {
 </div>	
 
 <div class="sidebar" id="sidebar">
-		<a class="item"href="${pageContext.request.contextPath}/board/register">Board 만들기</a> 
+	<a class="item"href="${pageContext.request.contextPath}/board/register">Board 만들기</a> 
+	
+	<br/>
+	<a href="${pageContext.request.contextPath}/member/sendmail?id=wjddk7507@naver.com">wjddk7507@naver.com</a>	
 </div>
 	
  <script>

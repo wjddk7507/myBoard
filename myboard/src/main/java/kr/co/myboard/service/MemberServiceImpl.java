@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,6 +20,10 @@ import kr.co.myboard.domain.Member;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDao memberDao;
+	
+	// 메일을 보내는 객체 주입
+	@Autowired
+	private MailSender mailSender;
 
 	@Override
 	public String idCheck(HttpServletRequest request) {
@@ -80,5 +86,31 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}		
 		return member;
+	}
+
+	@Override
+	public void sendmail(HttpServletRequest request) {
+		// sendmail.jsp에서 전송온 파라미터 읽기
+		String receiver = request.getParameter("receiver");
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		
+		try {
+			//메일 보내기 객체 만들기
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("wjddk7507@naver.com");
+			//받는 사람 설정
+			message.setTo(receiver);
+			//메일 제목 설정
+			message.setSubject(title);
+			//메일 내용 설정
+			message.setText(contents);
+			//메일 보내기
+			mailSender.send(message);
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 }

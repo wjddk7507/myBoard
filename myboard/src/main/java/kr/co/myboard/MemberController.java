@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -68,6 +69,18 @@ public class MemberController {
 		// 세션 초기화
 		session.invalidate();
 		// 메인 페이지로 리다이렉트(연속 2번하면 안되는 경우 리다이렉트..!!)
+		return "redirect:/";
+	}
+	@RequestMapping(value="member/sendmail", method=RequestMethod.GET)
+	public String sendmail(@RequestParam("id")String id, Model model) {
+		// model에 id 저장
+		model.addAttribute("id", id);
+		return "member/sendmail";
+	}
+	@RequestMapping(value="member/sendmail", method=RequestMethod.POST)
+	public String sendmail(HttpServletRequest request, RedirectAttributes attr) {
+		memberService.sendmail(request);
+		attr.addFlashAttribute("msg", "메일 보내기 성공");
 		return "redirect:/";
 	}
 }
