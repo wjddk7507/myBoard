@@ -63,7 +63,7 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="mymember/logout", method=RequestMethod.GET)
+	@RequestMapping(value="member/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		// 세션 초기화
 		session.invalidate();

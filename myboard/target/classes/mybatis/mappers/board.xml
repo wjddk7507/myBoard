@@ -14,4 +14,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="Board">
 		select * from myboard
 	</select>
+	
+	<!-- 상세보기 -->
+	<!-- 글번호에 해당하는 데이터의 조회수 1증가 -->
+	<update id="updateCnt" parameterType="java.lang.Integer">
+		update myboard set board_cnt=board_cnt+1 where board_num=#{board_num}
+	</update>
+	<!-- 글번호에 해당하는 데이터 가져오기 -->
+	<select id="detail" parameterType="java.lang.Integer" resultType="Board">
+		select * from myboard where board_num=#{board_num}
+	</select>
+	
+	<!-- 글번호에 해당하는 게시글 수정 -->
+	<update id="update" parameterType="Board">
+		update myboard 
+		set board_title=#{board_title}, board_content=#{board_content}, write_date=sysdate
+		where board_num=#{board_num}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from myboard where board_num=#{board_num}
+	</delete>
+	
 </mapper>

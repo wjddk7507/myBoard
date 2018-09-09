@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@include file="../include/header.jsp"%>
-	<div class="box">
+	<div class="box container">
 		<div class="box-header with-border">
 			<c:if test="${msg == null}">
 				<h3 class="box-title">게시판 목록보기</h3>

@@ -56,5 +56,41 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public Board detail(HttpServletRequest request) {
+		String board_num = request.getParameter("board_num");
+		// 조회수 1 증가
+		boardDao.updateCnt(Integer.parseInt(board_num));
+		// 데이터 가져오는 메소드 호출해서 리턴
+		return boardDao.detail(Integer.parseInt(board_num));
+	}
+
+	// 수정보기
+	@Override
+	public Board updateView(HttpServletRequest request) {
+		String board_num = request.getParameter("board_num");
+		return boardDao.detail(Integer.parseInt(board_num));
+	}
+
+	@Override
+	public void update(HttpServletRequest request) {
+		String board_title = request.getParameter("board_title");
+		String board_content = request.getParameter("board_content");
+		String board_num = request.getParameter("board_num");
+		
+		Board board = new Board();
+		board.setBoard_title(board_title);
+		board.setBoard_content(board_content);
+		board.setBoard_num(Integer.parseInt(board_num));
+		
+		boardDao.update(board);
+	}
+
+	@Override
+	public void delete(HttpServletRequest request) {
+		String board_num = request.getParameter("board_num");
+		boardDao.delete(Integer.parseInt(board_num));
 	}	
 }

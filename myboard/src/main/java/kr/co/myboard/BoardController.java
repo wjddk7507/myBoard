@@ -37,4 +37,28 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return "board/list";
 	}
+	@RequestMapping(value="board/detail", method=RequestMethod.GET)
+	public String detail(HttpServletRequest request, Model model) {
+		Board board = boardService.detail(request);
+		model.addAttribute("board", board);
+		return "board/detail";
+	}
+	@RequestMapping(value="board/update", method=RequestMethod.GET)
+	public String updateView(HttpServletRequest request, Model model) {
+		Board board = boardService.updateView(request);
+		model.addAttribute("board", board);
+		return "board/update";
+	}
+	@RequestMapping(value="board/update", method=RequestMethod.POST)
+	public String update(HttpServletRequest request, Model model, RedirectAttributes attr) {
+		boardService.update(request);
+		attr.addFlashAttribute("msg", "수정 성공");
+		return "redirect:list";
+	}
+	@RequestMapping(value="board/delete", method=RequestMethod.GET)
+	public String delete(HttpServletRequest request, Model model, RedirectAttributes attr) {
+		boardService.delete(request);
+		attr.addFlashAttribute("msg", "게시글 삭제 성공");
+		return "redirect:list";
+	}
 }
