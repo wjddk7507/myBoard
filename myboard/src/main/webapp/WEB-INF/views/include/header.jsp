@@ -102,6 +102,11 @@ html.open #sidebar {
 	border:1px solid black;
 	margin: 35px 20px auto 20px;
 }
+#profile-img{
+	width:100px;
+	height:100px;
+	border-radius:50px; /*반지금 50픽셀의 원이 만들어짐*/
+}
 </style>
 <body>
 <div id="wrap">

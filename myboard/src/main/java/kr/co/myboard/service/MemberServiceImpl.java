@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String nickname = request.getParameter("nickname");
-		// 파일
+		// 파일/
 		MultipartFile profile_img = request.getFile("profile_img");
 		
 		// 파일을 저장할 경로 만들기 // 파일은 절대경로로만 저장이 가능
