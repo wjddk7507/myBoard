@@ -8,6 +8,9 @@
 	</div>
 
 	<form role="form" method="post">
+		<!-- 현재 페이지 번호와 페이지당 출력 개수를 넘겨줌 -->
+		<input type="hidden" name="page" value="${criteria.page}"/>
+		<input type="hidden" name="perPageNum" value="${criteria.perPageNum}"/>
 		<!-- 데이터 수정을할 때 기본키의 값이 있어야하기 때문에 필요!!! 작업 끝나고 결과페이지 상세보기로 하려면 필요 -->
 		<input type="hidden" name="board_num" value="${board.board_num}"/>
 		<div class="box-body">

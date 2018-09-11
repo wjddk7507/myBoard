@@ -1,6 +1,8 @@
 package kr.co.myboard;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.myboard.domain.Board;
+import kr.co.myboard.domain.Criteria;
 import kr.co.myboard.service.BoardService;
 
 @Controller
@@ -32,33 +35,33 @@ public class BoardController {
 		return "redirect:list";
 	}
 	@RequestMapping(value="board/list", method=RequestMethod.GET)
-	public String list(HttpServletRequest request, Model model) {
-		List<Board> list = boardService.list();
-		model.addAttribute("list", list);
+	public String list(Criteria criteria, Model model) {
+		Map<String, Object> map = boardService.list(criteria);
+		model.addAttribute("map", map);
 		return "board/list";
 	}
 	@RequestMapping(value="board/detail", method=RequestMethod.GET)
-	public String detail(HttpServletRequest request, Model model) {
+	public String detail(Criteria criteria, HttpServletRequest request, Model model) {
 		Board board = boardService.detail(request);
 		model.addAttribute("board", board);
 		return "board/detail";
 	}
 	@RequestMapping(value="board/update", method=RequestMethod.GET)
-	public String updateView(HttpServletRequest request, Model model) {
+	public String updateView(Criteria criteria, HttpServletRequest request, Model model) {
 		Board board = boardService.updateView(request);
 		model.addAttribute("board", board);
 		return "board/update";
 	}
 	@RequestMapping(value="board/update", method=RequestMethod.POST)
-	public String update(HttpServletRequest request, Model model, RedirectAttributes attr) {
+	public String update(Criteria criteria, HttpServletRequest request, Model model, RedirectAttributes attr) {
 		boardService.update(request);
 		attr.addFlashAttribute("msg", "수정 성공");
-		return "redirect:list";
+		return "redirect:list?page="+criteria.getPage()+"&perPageNum="+criteria.getPerPageNum();
 	}
 	@RequestMapping(value="board/delete", method=RequestMethod.GET)
-	public String delete(HttpServletRequest request, Model model, RedirectAttributes attr) {
+	public String delete(Criteria criteria, HttpServletRequest request, Model model, RedirectAttributes attr) {
 		boardService.delete(request);
 		attr.addFlashAttribute("msg", "게시글 삭제 성공");
-		return "redirect:list";
+		return "redirect:list?page="+criteria.getPage()+"&perPageNum="+criteria.getPerPageNum();
 	}
 }

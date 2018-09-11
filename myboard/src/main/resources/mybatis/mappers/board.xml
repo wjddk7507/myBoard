@@ -10,9 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(boardseq.nextval,#{board_title},#{board_content},#{id},#{nickname},#{profile_img})
 	</insert>
 	
-	<!-- 게시글 전체 목록 가져오기-->
-	<select id="list" resultType="Board">
-		select * from myboard
+	<!-- 게시글 전체 목록 가져오기, Criteria를 파라미터로 받음으로써 필요한 만큼의 데이터만 가져옴-->
+	<select id="list" resultType="Board" parameterType="Criteria">
+		select board_num, board_title, board_content, id, nickname, profile_img, write_date, board_cnt, board_recommend
+		from (select rownum rnum, board_num, board_title, board_content, id, nickname, profile_img, write_date, board_cnt, board_recommend
+				from (select * from myboard order by write_date desc))
+					where rnum &gt;=#{pageStart} and rnum &lt;=#{pageStart}+#{perPageNum}-1
 	</select>
 	
 	<!-- 상세보기 -->
@@ -42,4 +45,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from myboard order by board_recommend
 	</select>
 	
+	<!-- 날짜 순으로 조회 -->
+	<select id="order_date" resultType="Board">
+		select * from myboard order by write_date desc
+	</select>
+	
+	<!-- 전체 데이터 개수를 가져오는 SQL -->
+	<select id="totalcount" resultType="java.lang.Integer">
+		select count(*) from myboard
+	</select>
 </mapper>

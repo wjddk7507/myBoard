@@ -1,7 +1,9 @@
 package kr.co.myboard.service;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import kr.co.myboard.dao.BoardDao;
 import kr.co.myboard.domain.Board;
+import kr.co.myboard.domain.Criteria;
 import kr.co.myboard.domain.Member;
+import kr.co.myboard.domain.PageMaker;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -40,24 +44,45 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> list() {
+	public Map<String, Object> list(Criteria criteria) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 데이터 가져오기
+		List<Board> list = boardDao.list(criteria);
+		// 마지막 페이지에 있는 데이터가 1개 밖에 없을 때
+		// 그 데이터를 삭제하면 그 페이지의 데이터는 없다
+		if(list.size()==0) {
+			// 현재  페이지 번호를 1 감소시켜서 데이터를 다시 가져오기
+			criteria.setPage(criteria.getPage()-1);
+			list = boardDao.list(criteria);
+		}
 		// 오늘 날짜에 작성된 게시글은 시간, 이전에 작성된 게시글은 날짜 출력
-		List<Board> list = boardDao.list();
 		// 오늘 날짜 만들기
 		Calendar cal = Calendar.getInstance();
 		Date today = new Date(cal.getTimeInMillis());
 		// list의 데이터들을 확인해서 날짜와 시간을 저장
 		for(Board board : list) {
 			// 작성한 날짜 가져오기
-			String regdate = board.getWrite_date().substring(0, 10);
-			if(today.toString().equals(regdate)) {
+			String write_date = board.getWrite_date().substring(0, 10);
+			if(today.toString().equals(write_date)) {
 				// 시간을 저장
-				board.setDispDate(board.getWrite_date().substring(11, 16));
+				board.setWrite_date(board.getWrite_date().substring(11, 16));
 			}else {
-				board.setDispDate(regdate);
+				board.setWrite_date(write_date);
 			}
 		}
-		return list;
+		// 게시물 목록을 Map에 저장
+		map.put("list", list);
+		
+		// 페이지 번호 목록 만들기
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);		
+		// 전체 데이터 개수 저장
+		pageMaker.setTotalCount(boardDao.totalCount());
+		// 페이지 번호 목록 Map에 저장
+		map.put("pageMaker", pageMaker);
+			
+		return map;
 	}
 
 	@Override
@@ -100,5 +125,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> order_recommend() {
 		List<Board> order_recommend = boardDao.order_recommend();
 		return order_recommend;
+	}
+
+	@Override
+	public List<Board> order_date() {
+		List<Board> order_date = boardDao.order_date();
+		return order_date;
 	}	
 }

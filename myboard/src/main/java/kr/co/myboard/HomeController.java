@@ -30,8 +30,8 @@ public class HomeController {
 		
 		List<Board> order_recommend = boardService.order_recommend();
 		model.addAttribute("recommend", order_recommend);
-		List<Board> list = boardService.list();
-		model.addAttribute("list", list);
+		List<Board> order_date = boardService.order_date();
+		model.addAttribute("order_date", order_date);
 		
 		return "home";
 	}

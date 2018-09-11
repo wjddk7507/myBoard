@@ -19,7 +19,7 @@
 	<div id="board-right">
 		<h4>새로 생긴 게시판</h4>
 		<ul>
-			<c:forEach var="item" items="${list}" begin="0" end="4">
+			<c:forEach var="item" items="${order_date}" begin="0" end="4">
 				<li><a href="board/detail?board_num=${item.board_num}">${item.board_title}</a></li>
 			</c:forEach>
 		</ul>
