@@ -89,11 +89,11 @@ html.open #sidebar {
 	margin-left:100px;
 }
 #tv-wrapper{
-		background-color:#F2F2F2; 
-		text-align:center; 
-		vertical-align:middle; 
-		width:100%; 
-		height:300px
+	background-color:#F2F2F2; 
+	text-align:center; 
+	vertical-align:middle; 
+	width:100%; 
+	height:300px;
 }
 #tv{
 	display:inline-block; 
@@ -103,10 +103,27 @@ html.open #sidebar {
 	margin: 35px 20px auto 20px;
 }
 #profile-img{
-	width:100px;
-	height:100px;
-	border-radius:50px; /*반지금 50픽셀의 원이 만들어짐*/
+	width:50px;
+	height:50px;
+	border-radius:25px; /*반지금 25픽셀의 원이 만들어짐*/
 }
+ /*인기 게시판, 새로 생긴 게시판*/
+ #board-main{
+	width:100%;
+	max-width:600px;
+	height:250px;
+	padding:20px;
+ }	
+ #board-left{
+ 	float:left;
+ 	width:50%;
+	max-width:250px;
+ }
+#board-right{
+ 	float:right;
+ 	width:50%;
+	max-width:250px;
+ }
 </style>
 <body>
 <div id="wrap">

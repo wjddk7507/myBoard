@@ -27,8 +27,9 @@
 				</div>
 
 				<div class="form-group">
-					<label>작성자</label> <input type="text" class="form-control"
-						value="${board.nickname}" readonly="readonly" />
+					<label>작성자</label> 
+					<img src="${pageContext.request.contextPath}/profile/${board.profile_img}" id="profile-img">
+					<input type="text" class="form-control" value="${board.nickname}" readonly="readonly" />
 				</div>
 			</div>
 			<div class="box-footer">

@@ -1,6 +1,7 @@
 package kr.co.myboard;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,15 +13,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.myboard.domain.Board;
+import kr.co.myboard.service.BoardService;
+import kr.co.myboard.service.BoardServiceImpl;
+
 @Controller
 public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		System.out.println(sqlSession);
+		
+		List<Board> order_recommend = boardService.order_recommend();
+		model.addAttribute("recommend", order_recommend);
+		List<Board> list = boardService.list();
+		model.addAttribute("list", list);
+		
 		return "home";
 	}
-	
 }

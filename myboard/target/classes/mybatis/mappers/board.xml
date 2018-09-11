@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게시글 저장하는 sql -->	
 	<insert id="register" parameterType="Board">
-		insert into myboard(board_num, board_title, board_content, id, nickname)
-		values(boardseq.nextval,#{board_title},#{board_content},#{id},#{nickname})
+		insert into myboard(board_num, board_title, board_content, id, nickname, profile_img)
+		values(boardseq.nextval,#{board_title},#{board_content},#{id},#{nickname},#{profile_img})
 	</insert>
 	
 	<!-- 게시글 전체 목록 가져오기-->
@@ -36,5 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="java.lang.Integer">
 		delete from myboard where board_num=#{board_num}
 	</delete>
+	
+	<!-- 추천 순으로 조회 -->
+	<select id="order_recommend" resultType="Board">
+		select * from myboard order by board_recommend
+	</select>
 	
 </mapper>

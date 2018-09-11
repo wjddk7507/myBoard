@@ -15,5 +15,6 @@ public interface BoardService {
 	// 수정
 	public void update(HttpServletRequest request);
 	public void delete(HttpServletRequest request);
-	
+
+	public List<Board> order_recommend();
 }

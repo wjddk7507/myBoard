@@ -17,7 +17,7 @@ public class JSONController {
 	private MemberService memberService;
 	
 	// 아이디 중복 체크 요청을 처리
-	@RequestMapping(value="mymember/idCheck", method=RequestMethod.GET)
+	@RequestMapping(value="member/idCheck", method=RequestMethod.GET)
 	public Map<String, Object> idCheck(HttpServletRequest request){
 		String id = memberService.idCheck(request);
 		// 리턴할 Map을 생성

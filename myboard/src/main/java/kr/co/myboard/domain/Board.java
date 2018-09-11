@@ -8,9 +8,10 @@ public class Board {
 	private String board_content;
 	private String id;
 	private String nickname;
+	private String profile_img;
 	private String write_date;
 	private int board_cnt;
-	private int board_recommends;
+	private int board_recommend;
 
 	// 날짜 및 시간을 출력할 변수 // 오늘 작성한 글은 시간을, 어제 이전에 작성된 글은 날짜를 출력
 	private String dispDate;
@@ -55,6 +56,14 @@ public class Board {
 		this.nickname = nickname;
 	}
 
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
 	public String getWrite_date() {
 		return write_date;
 	}
@@ -71,12 +80,12 @@ public class Board {
 		this.board_cnt = board_cnt;
 	}
 
-	public int getBoard_recommends() {
-		return board_recommends;
+	public int getBoard_recommend() {
+		return board_recommend;
 	}
 
-	public void setBoard_recommends(int board_recommends) {
-		this.board_recommends = board_recommends;
+	public void setBoard_recommends(int board_recommend) {
+		this.board_recommend = board_recommend;
 	}
 
 	public String getDispDate() {
@@ -90,7 +99,8 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [board_num=" + board_num + ", board_title=" + board_title + ", board_content=" + board_content
-				+ ", id=" + id + ", nickname=" + nickname + ", write_date=" + write_date + ", board_cnt=" + board_cnt
-				+ ", board_recommends=" + board_recommends + ", dispDate=" + dispDate + "]";
+				+ ", id=" + id + ", nickname=" + nickname + ", profile_img=" + profile_img + ", write_date="
+				+ write_date + ", board_cnt=" + board_cnt + ", board_recommend=" + board_recommend + ", dispDate="
+				+ dispDate + "]";
 	}
 }

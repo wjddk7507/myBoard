@@ -31,4 +31,7 @@ public class BoardDao {
 	public void delete(int board_num) {
 		sqlSession.delete("board.delete", board_num);
 	}
+	public List<Board> order_recommend(){
+		return sqlSession.selectList("board.order_recommend");
+	}
 }

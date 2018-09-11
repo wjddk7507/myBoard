@@ -27,12 +27,14 @@ public class BoardServiceImpl implements BoardService {
 		Member member = (Member)session.getAttribute("member");
 		String id = member.getId();
 		String nickname = member.getNickname();
+		String profile_img = member.getProfile_img();
 				
 		Board board = new Board();
 		board.setId(id);
 		board.setNickname(nickname);
 		board.setBoard_content(board_content);
 		board.setBoard_title(board_title);
+		board.setProfile_img(profile_img);
 		
 		boardDao.register(board);
 	}
@@ -92,5 +94,11 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(HttpServletRequest request) {
 		String board_num = request.getParameter("board_num");
 		boardDao.delete(Integer.parseInt(board_num));
+	}
+	
+	@Override
+	public List<Board> order_recommend() {
+		List<Board> order_recommend = boardDao.order_recommend();
+		return order_recommend;
 	}	
 }

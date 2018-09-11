@@ -33,7 +33,7 @@
 						<td align="right">${vo.board_num}&nbsp;</td>
 						<td>&nbsp; <a href='detail?board_num=${vo.board_num}'>${vo.board_title}</a></td>
 						<td>
-							<img src="${vo.profile_img}" class="profile-img">
+							<img src="${pageContext.request.contextPath}/profile/${vo.profile_img}" id="profile-img">
 							&nbsp;${vo.nickname}
 						</td>
 						<td>&nbsp; ${vo.dispDate}</td>

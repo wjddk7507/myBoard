@@ -72,7 +72,7 @@ function confirmId(){
 	idDiv = document.getElementById("idDiv");
 	
 	$.ajax({
-		// user/emailcheck 가 아니라 emailcheck!! user/register 위치에서 요청을 하기때문에
+		// member/join 위치에서 요청을 하기때문에
 		url:'idCheck',
 		// ? 뒤에 오는 값!!
 		data:{'id':val},
