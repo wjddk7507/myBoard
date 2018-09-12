@@ -41,6 +41,16 @@
 				<button class="btn btn-primary" id="listBtn">목록</button>
 			</div>
 		</div>
+		
+		<button class="btn btn-info" id="replyadd">댓글작성</button>
+		<!-- 댓글 작성 및 수정 대화상자 영역 -->
+		<div class="box-body" style="display:none" id="replyform">
+			<label for="nickname">작성자</label>
+			<input class="form-control" type="text" id="nickname" value="${member.nickname}" readonly="readonly" />
+			<label for="reply_content">댓글내용</label>
+			<input type="text" class="form-control" id="reply_content" placeholder="댓글 내용을 작성하세요!" />
+		</div>
+		
 	</div>
 	</section>
 	<script>
@@ -63,6 +73,43 @@
 				});
 		</c:if>
 		
+		
+		
+		//댓글 작성 버튼을 눌렀을 때 수행할 내용
+		document.getElementById("replyadd").addEventListener(
+			"click", function(){
+			$('#replyform').dialog({
+				resizable:false,
+				height:'auto',
+				width:400,
+				model:true,
+				buttons:{
+					"저장":function(){
+						$(this).dialog("close");
+						//입력한 내용 가져오기
+						reply_content = document.getElementById("reply_content").value;
+						$.ajax({
+							url:"../reply/register",
+							data:{
+								"board_num":'${board.board_num}',
+								"id":'${member.id}',
+								"nickname":'${member.nickname}',
+								"profile_img":'${member.profile_img}',
+								"depth":0,
+								"reply_content": reply_content
+							},
+							dataType:"json",
+							success:function(data){
+								alert(data.result)
+							}
+						});
+					},
+					"취소":function(){
+						$(this).dialog("close");
+					}
+				}
+			});
+		});
 		
 	</script>
 	

@@ -1,0 +1,41 @@
+package kr.co.myboard.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.myboard.dao.ReplyDao;
+import kr.co.myboard.domain.Reply;
+
+@Service
+public class ReplyServiceImpl implements ReplyService {
+	@Autowired
+	private ReplyDao replyDao;
+
+	@Override
+	public boolean register(HttpServletRequest request) {
+		boolean result = false;
+		
+		String board_num = request.getParameter("board_num");
+		String id = request.getParameter("id");
+		String nickname = request.getParameter("nickname");
+		String profile_img = request.getParameter("profile_img");
+		String reply_content =request.getParameter("reply_content");
+		String depth = request.getParameter("depth");
+		
+		Reply reply = new Reply();
+		reply.setBoard_num(Integer.parseInt(board_num));
+		reply.setId(id);
+		reply.setNickname(nickname);
+		reply.setProfile_img(profile_img);
+		reply.setDepth(Integer.parseInt(depth));
+		reply.setReply_content(reply_content);
+		
+		int r = replyDao.register(reply);
+		
+		if(r>0) result=true;
+		return result;
+	}
+	
+}
