@@ -3,6 +3,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.myboard.domain.Board;
+import kr.co.myboard.domain.SearchCriteria;
 import kr.co.myboard.service.BoardService;
 import kr.co.myboard.service.BoardServiceImpl;
 
@@ -25,7 +27,7 @@ public class HomeController {
 	private BoardService boardService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(SearchCriteria criteria, Locale locale, Model model) {
 		System.out.println(sqlSession);
 		
 		List<Board> order_recommend = boardService.order_recommend();

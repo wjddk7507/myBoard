@@ -82,17 +82,44 @@
 			</ul>
 		</div>
 		
+		
+		<div class="box-body text-center">
+			<select name="searchType" id="searchType">
+				<option value="t" <c:out value="${map.pageMaker.criteria.searchType==t?'selected':''}"/>>제목</option>
+				<option value="c" <c:out value="${map.pageMaker.criteria.searchType==c?'selected':''}"/>>내용</option>
+				<option value="tc" <c:out value="${map.pageMaker.criteria.searchType==tc?'selected':''}"/>>제목+내용</option>
+			</select>
+			<input type="text" name="keyword" id="keyword" value="${criteria.keyword}"/>
+			<input type="button" class="btn btn-success" value="검색" id="searchBtn"/>
+		</div>
+			
+		
 		<div class="box-footer">
 			<div class="text-center">
 				<button id='mainBtn' class="btn-primary">메인으로</button>
 			</div>
 			<script>
+			
+
+			 document.getElementById("searchBtn").addEventListener("click", function(){
+					// select의 선택된 항목 찾기
+					// 선택된 행 번호 가져오기
+					alert("zz");
+					var x = document.getElementById("searchType").selectedIndex;
+					// select의 모든 값을 배열로 가져오기
+					var y = document.getElementById("searchType").options;
+					// keyword에 입력된 값 가져오기
+					keyword = document.getElementById("keyword").value;
+					location.href = "${pageContext.request.contextPath}/board/list?page=1&perPageNum=10&searchType="+y[x].value+"&keyword="+keyword;
+				});
+			 
 				$(function() {
 					$('#mainBtn').on("click", function(event) {
 						location.href = "../";
 					});
 				});
 				
+				/*
 				document.getElementById("count").addEventListener("change", function(){
 					searchType = document.getElementById("searchType").value;
 					keyword = document.getElementById("keyword").value;
@@ -101,12 +128,15 @@
 							'perPageNum=' + this.value + "&serarchType=" +
 							searchType + "&keyword=" + keyword;
 				});
-			
+				*/
+				
 				$(function() {
 					$('#mainBtn').on("click", function(event) {
 						location.href = "../";
 					});
 				});
+				
+
 			</script>
 		</div>
 	</div>

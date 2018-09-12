@@ -133,17 +133,6 @@ html.open #sidebar {
 			<a href="${pageContext.request.contextPath}" style="color:#dda0dd">MyBoard</a>
 			<a class="item" href="${pageContext.request.contextPath}/board/list">Board List</a> 
 			
-			<div class="box-body text-center">
-				<select name="searchType" id="searchType">
-					<option value="n" <c:out value="${map.pageMaker.criteria.searchType==null?'selected':''}"/>>--</option>
-					<option value="t" <c:out value="${map.pageMaker.criteria.searchType==t?'selected':''}"/>>제목</option>
-					<option value="c" <c:out value="${map.pageMaker.criteria.searchType==c?'selected':''}"/>>내용</option>
-					<option value="tc" <c:out value="${map.pageMaker.criteria.searchType==tc?'selected':''}"/>>제목+내용</option>
-				</select>
-				<input type="text" name="keyword" id="keyword" value="${criteria.keyword}"/>
-				<input type="button" class="btn btn-success" value="검색" id="searchBtn"/>
-			</div>
-			
 			<c:if test="${member==null}">
 				<a class="ui item" href="${pageContext.request.contextPath}/member/login">Login</a>
 				<a class="ui item" href="${pageContext.request.contextPath}/member/join">Join</a>
@@ -169,16 +158,6 @@ html.open #sidebar {
 	 $("html").toggleClass("open");
  })
  
- document.getElementById("searchBtn").addEventListener("click", function(){
-		// select의 선택된 항목 찾기
-		// 선택된 행 번호 가져오기
-		var x = document.getElementById("searchType").selectedIndex;
-		// select의 모든 값을 배열로 가져오기
-		var y = document.getElementById("searchType").options;
-		// keyword에 입력된 값 가져오기
-		keyword = document.getElementById("keyword").value;
-		location.href = "${pageContext.request.contextPath}/board/list?page=1&perPageNum=10&searchType="+y[x].value+"&keyword="+keyword;
-	});
 </script>
 </body>
 	
