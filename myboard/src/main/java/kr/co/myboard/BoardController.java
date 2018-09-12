@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.myboard.domain.Board;
 import kr.co.myboard.domain.Criteria;
+import kr.co.myboard.domain.SearchCriteria;
 import kr.co.myboard.service.BoardService;
 
 @Controller
@@ -35,7 +36,7 @@ public class BoardController {
 		return "redirect:list";
 	}
 	@RequestMapping(value="board/list", method=RequestMethod.GET)
-	public String list(Criteria criteria, Model model) {
+	public String list(SearchCriteria criteria, Model model) {
 		Map<String, Object> map = boardService.list(criteria);
 		model.addAttribute("map", map);
 		return "board/list";

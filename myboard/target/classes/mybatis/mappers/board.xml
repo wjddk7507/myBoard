@@ -11,10 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 게시글 전체 목록 가져오기, Criteria를 파라미터로 받음으로써 필요한 만큼의 데이터만 가져옴-->
-	<select id="list" resultType="Board" parameterType="Criteria">
+	<select id="list" resultType="Board" parameterType="SearchCriteria">
 		select board_num, board_title, board_content, id, nickname, profile_img, write_date, board_cnt, board_recommend
 		from (select rownum rnum, board_num, board_title, board_content, id, nickname, profile_img, write_date, board_cnt, board_recommend
-				from (select * from myboard order by write_date desc))
+				from (select * from myboard <include refid="search"></include>order by write_date desc))
 					where rnum &gt;=#{pageStart} and rnum &lt;=#{pageStart}+#{perPageNum}-1
 	</select>
 	
@@ -51,7 +51,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 전체 데이터 개수를 가져오는 SQL -->
-	<select id="totalcount" resultType="java.lang.Integer">
+	<select id="totalcount" resultType="java.lang.Integer" parameterType="SearchCriteria">
 		select count(*) from myboard
+		<include refid="search"></include>		
 	</select>
+	
+	<!-- 동적 SQL(조건에 따라 다르게 적용) 생성 -->
+	<sql id="search">
+		<if test="searchType!=null">
+			<if test="searchType=='t'.toString()">
+				where board_title like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType=='c'.toString()">
+			where board_content like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType=='tc'.toString()">
+				where board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%'
+			</if>			
+		</if>
+	</sql>
+	
 </mapper>

@@ -16,6 +16,7 @@ import kr.co.myboard.domain.Board;
 import kr.co.myboard.domain.Criteria;
 import kr.co.myboard.domain.Member;
 import kr.co.myboard.domain.PageMaker;
+import kr.co.myboard.domain.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -44,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Map<String, Object> list(Criteria criteria) {
+	public Map<String, Object> list(SearchCriteria criteria) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// 데이터 가져오기
@@ -78,7 +79,7 @@ public class BoardServiceImpl implements BoardService {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);		
 		// 전체 데이터 개수 저장
-		pageMaker.setTotalCount(boardDao.totalCount());
+		pageMaker.setTotalCount(boardDao.totalCount(criteria));
 		// 페이지 번호 목록 Map에 저장
 		map.put("pageMaker", pageMaker);
 			

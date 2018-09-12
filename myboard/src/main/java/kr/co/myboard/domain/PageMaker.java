@@ -14,7 +14,7 @@ public class PageMaker {
 	// 페이지 번호 출력 개수
 	private int displayPageNum = 10;
 	// 이전에 설정된 옵션 값을 저장하기 위한 변수
-	private Criteria criteria;
+	private SearchCriteria criteria;
 	
 	public int getTotalCount() {
 		return totalCount;
@@ -70,7 +70,7 @@ public class PageMaker {
 	public Criteria getCriteria() {
 		return criteria;
 	}
-	public void setCriteria(Criteria criteria) {
+	public void setCriteria(SearchCriteria criteria) {
 		this.criteria = criteria;
 	}
 	@Override

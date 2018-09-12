@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.myboard.domain.Board;
 import kr.co.myboard.domain.Criteria;
+import kr.co.myboard.domain.SearchCriteria;
 
 @Repository
 public class BoardDao {
@@ -17,7 +18,7 @@ public class BoardDao {
 	public void register(Board board) {
 		sqlSession.insert("board.register", board);
 	}
-	public List<Board> list(Criteria criteria){
+	public List<Board> list(SearchCriteria criteria){
 		return sqlSession.selectList("board.list", criteria);
 	}
 	public void updateCnt(int board_num) {
@@ -38,7 +39,7 @@ public class BoardDao {
 	public List<Board> order_date(){
 		return sqlSession.selectList("board.order_date");
 	}
-	public int totalCount() {
-		return sqlSession.selectOne("board.totalcount");
+	public int totalCount(SearchCriteria criteria) {
+		return sqlSession.selectOne("board.totalcount", criteria);
 	}
 }

@@ -21,6 +21,7 @@
 		</div>
 		
 		<!-- 출력할 데이터 개수를 설정하는 select -->
+		<!-- 
 		<div class="box-header with-border">
 			<span>목록 개수</span>
 			<select id="count" class="form-controller">
@@ -30,6 +31,7 @@
 				<option value="4"<c:out value="${map.pageMaker.criteria.perPageNum==4?'selected':' ' }"/>>4개씩 보기</option>
 			</select>
 		</div>
+		//-->
 		
 		<div class="box-body">
 			<table class="table table-bordered table-hover">
@@ -43,14 +45,17 @@
 				<c:forEach var="vo" items="${map.list }">
 					<tr>
 						<td align="right">${vo.board_num}&nbsp;</td>
-						<td>&nbsp; <a href='detail?board_num=${vo.board_num}'>${vo.board_title}</a></td>
+						<td>&nbsp; 
+							<a href='detail?board_num=${vo.board_num}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.criteria.searchType}&keyword=${map.criteria.keyword}'>${vo.board_title}</a>
+						</td>
 						<td>
 							<img src="${pageContext.request.contextPath}/profile/${vo.profile_img}" id="profile-img">
 							&nbsp;${vo.nickname}
 						</td>
 						<td>&nbsp; ${vo.dispDate}</td>
-						<td align="right"><span class="badge bg-blue">
-								${vo.board_cnt}</span>&nbsp;</td>
+						<td align="right">
+							<span class="badge bg-blue">${vo.board_cnt}</span>&nbsp;
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -62,15 +67,15 @@
 				<c:if test="${map.pageMaker.totalCount > 0}">
 					<!-- 이전 링크 -->
 					<c:if test="${map.pageMaker.prev}">
-						<li><a href="list?page=${map.pageMaker.startPage-1}&perPageNum=${map.pageMaker.criteria.perPageNum}">이전</a></li>
+						<li><a href="list?page=${map.pageMaker.startPage-1}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">이전</a></li>
 					</c:if>
 					<!-- 페이지 번호 -->
 					<c:forEach var="idx" begin="${map.pageMaker.startPage}" end="${map.pageMaker.endPage}">
-						<li <c:out value="${map.pageMaker.criteria.page==idx?'class=active':''}"/>><a href="list?page=${idx}&perPageNum=${map.pageMaker.criteria.perPageNum}">${idx}</a></li>
+						<li <c:out value="${map.pageMaker.criteria.page==idx?'class=active':''}"/>><a href="list?page=${idx}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">${idx}</a></li>
 					</c:forEach>
 					<!-- 다음 링크 -->
 					<c:if test="${map.pageMaker.next}">
-						<li><a href="list?page=${map.pageMaker.endPage+1}&perPageNum=${map.pageMaker.criteria.perPageNum}">다음</a></li>
+						<li><a href="list?page=${map.pageMaker.endPage+1}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">다음</a></li>
 					</c:if>
 					
 				</c:if>
@@ -82,6 +87,21 @@
 				<button id='mainBtn' class="btn-primary">메인으로</button>
 			</div>
 			<script>
+				$(function() {
+					$('#mainBtn').on("click", function(event) {
+						location.href = "../";
+					});
+				});
+				
+				document.getElementById("count").addEventListener("change", function(){
+					searchType = document.getElementById("searchType").value;
+					keyword = document.getElementById("keyword").value;
+					
+					location.href = 'list?page=${map.pageMaker.criteria.page}&' +
+							'perPageNum=' + this.value + "&serarchType=" +
+							searchType + "&keyword=" + keyword;
+				});
+			
 				$(function() {
 					$('#mainBtn').on("click", function(event) {
 						location.href = "../";
