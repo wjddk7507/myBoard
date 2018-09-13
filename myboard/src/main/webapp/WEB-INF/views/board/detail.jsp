@@ -51,6 +51,14 @@
 			<input type="text" class="form-control" id="reply_content" placeholder="댓글 내용을 작성하세요!" />
 		</div>
 		
+		<!-- 댓글이 있는 경우에만 버튼을 출력 -->
+		<c:if test="${board.replycnt > 0}">
+			<button class="btn btn-default" id="replylist">댓글읽기</button>
+		</c:if>
+				
+		<!-- 댓글 출력 영역 -->
+		<div id="replydisp"></div>		
+		
 	</div>
 	</section>
 	<script>
@@ -100,7 +108,8 @@
 							},
 							dataType:"json",
 							success:function(data){
-								alert(data.result)
+								// 댓글을 출력하는 함수를 호출
+								getReply();
 							}
 						});
 					},
@@ -142,5 +151,74 @@
 	</script>
 	
 </c:if>
+
+
+
+<script>
+//접속한 유저의 이메일을 자바스크립트에서 사용할 수 있도록 변수에 저장
+id = "${member.id}";
+
+//댓글 읽기 버튼을 눌렀을 때의 동작
+<c:if test="${board.replycnt > 0}">
+	document.getElementById("replylist").addEventListener(
+		"click", function(){
+		
+		//함수를 호출
+		//댓글 저장이나 수정 및 삭제 후에도 호출할 것이므로
+		//별도의 함수로 만드는 것이 코딩양을 줄이기 때문입니다.
+		getReply();
+			
+	});
+</c:if>
+
+//댓글 목록을 가져오는 함수
+function getReply(){
+	//댓글 목록을 가져오는 ajax 요청
+	$.ajax({
+		url:"../reply/list",
+		data:{"board_num":'${board.board_num}'},
+		dataType:"json",
+		success:function(data){
+			//출력하는 함수 호출
+			//하나의 영역에서 코드가 너무 길어지면
+			//알아보기 힘들기 때문에 코드를 분할
+			display(data);
+		}
+	});
+}
+
+//댓글을 출력하는 함수
+function display(data){
+	//출력 내용을 저장할 변수를 생성
+	disp = '';
+	//data 배열을 순회 - idx는 인덱스이고 item은 실제 내용
+	$(data).each(function(idx, item){
+		disp += "<div style='width:80%;height:50px'><label>";
+		disp += item.nickname + ":" + item.reply_content ;
+		disp += "</label>";
+		//접속한 유저와 댓글을 작성한 유저가 동일인이면
+		if(id == item.id){
+			//삭제 버튼을 생성
+			//삭제 버튼이 여러 개 될 수 있는 경우 
+			//버튼의 id를 구분할 수 있는 값으로 만들면
+			//나중에 id를 가지고 구분할 수 있습니다.
+			disp += "<button type='submit' class='btn btn-danger'";
+			disp += " id='del" + item.reply_num + "' ";
+			disp += "style='float:right' ";
+			disp += "onclick = 'del(this)'>댓글삭제</button>";
+			
+			disp += "<button type='submit' class='btn btn-warning'";
+			disp += " id='mod" + item.reply_num + "' ";
+			disp += "style='float:right' ";
+			disp += "onclick = 'mod(this)'>댓글수정</button>";
+			
+		}
+		
+		disp += "</div>";
+	});
+	//출력 영역에 출력
+	document.getElementById("replydisp").innerHTML = disp;
+}
+</script>
 </body>
 </html>

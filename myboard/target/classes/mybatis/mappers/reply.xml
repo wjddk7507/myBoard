@@ -9,5 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into myreply (reply_num, board_num, id, nickname, profile_img, reply_content, depth)
 		values(replyseq.nextval, #{board_num}, #{id}, #{nickname}, #{profile_img}, #{reply_content}, #{depth})
 	</insert>
+	
+	<!-- 댓글 목록 가져오기 -->
+	<select id="list" parameterType="java.lang.Integer" resultType="Reply">
+		select * from myreply where board_num=#{board_num}
+	</select>
 
 </mapper>

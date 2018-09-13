@@ -42,4 +42,7 @@ public class BoardDao {
 	public int totalCount(SearchCriteria criteria) {
 		return sqlSession.selectOne("board.totalcount", criteria);
 	}
+	public int replycnt(int board_num) {
+		return sqlSession.selectOne("board.replycnt", board_num);
+	}
 }

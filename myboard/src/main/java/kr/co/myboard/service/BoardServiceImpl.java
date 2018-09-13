@@ -1,3 +1,4 @@
+
 package kr.co.myboard.service;
 import java.sql.Date;
 import java.util.Calendar;
@@ -63,6 +64,10 @@ public class BoardServiceImpl implements BoardService {
 		Date today = new Date(cal.getTimeInMillis());
 		// list의 데이터들을 확인해서 날짜와 시간을 저장
 		for(Board board : list) {
+			// 각 보드의 댓글 개수 가져와서 저장하기
+			int replycnt = boardDao.replycnt(board.getBoard_num());
+			board.setReplycnt(replycnt);
+			
 			// 작성한 날짜 가져오기
 			String write_date = board.getWrite_date().substring(0, 10);
 			if(today.toString().equals(write_date)) {
@@ -91,8 +96,10 @@ public class BoardServiceImpl implements BoardService {
 		String board_num = request.getParameter("board_num");
 		// 조회수 1 증가
 		boardDao.updateCnt(Integer.parseInt(board_num));
-		// 데이터 가져오는 메소드 호출해서 리턴
-		return boardDao.detail(Integer.parseInt(board_num));
+		Board board = boardDao.detail(Integer.parseInt(board_num)); 
+		// 댓글 개수를 가져와서 설정
+		board.setReplycnt(boardDao.replycnt(Integer.parseInt(board_num)));
+		return board;
 	}
 
 	// 수정보기

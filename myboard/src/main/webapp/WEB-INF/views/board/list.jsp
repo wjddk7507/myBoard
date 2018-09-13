@@ -47,6 +47,10 @@
 						<td align="right">${vo.board_num}&nbsp;</td>
 						<td>&nbsp; 
 							<a href='detail?board_num=${vo.board_num}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.criteria.searchType}&keyword=${map.criteria.keyword}'>${vo.board_title}</a>
+							<span class="badge badge-danger">${vo.replycnt}</span>
+							<c:if test="${vo.replycnt > 0}">
+								<img src="../resources/hot.png" width="25" height="25" />
+							</c:if>
 						</td>
 						<td>
 							<img src="${pageContext.request.contextPath}/profile/${vo.profile_img}" id="profile-img">

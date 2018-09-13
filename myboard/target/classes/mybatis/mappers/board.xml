@@ -71,4 +71,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	
+	<!-- myreply 테이블에서 게시글 번호에 해당하는 데이터 개수 구해줌 -->
+	<select id="replycnt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from myreply where board_num = #{board_num}
+	</select>
+	
 </mapper>

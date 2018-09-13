@@ -1,5 +1,8 @@
 package kr.co.myboard.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,14 @@ public class ReplyServiceImpl implements ReplyService {
 		
 		if(r>0) result=true;
 		return result;
+	}
+
+	@Override
+	public List<Reply> list(HttpServletRequest request) {
+		List<Reply> list = new ArrayList<Reply>();
+		String board_num = request.getParameter("board_num");
+		list = replyDao.list(Integer.parseInt(board_num));
+		return list;
 	}
 	
 }

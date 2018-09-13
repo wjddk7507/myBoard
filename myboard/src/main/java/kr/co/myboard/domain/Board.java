@@ -16,6 +16,16 @@ public class Board {
 	// 날짜 및 시간을 출력할 변수 // 오늘 작성한 글은 시간을, 어제 이전에 작성된 글은 날짜를 출력
 	private String dispDate;
 
+	// 댓글 개수 저장할 변수
+	private int replycnt;
+	
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
+	
 	public int getBoard_num() {
 		return board_num;
 	}
