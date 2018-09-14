@@ -119,6 +119,13 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- jsoup , html 파싱을 위한 라이브러리 -->
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.8.3</version>
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>

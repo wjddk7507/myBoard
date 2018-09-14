@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.myboard.domain.Board;
+import kr.co.myboard.domain.Navertv;
 import kr.co.myboard.domain.SearchCriteria;
 import kr.co.myboard.service.BoardService;
 import kr.co.myboard.service.BoardServiceImpl;
+import kr.co.myboard.service.ContentService;
 
 @Controller
 public class HomeController {
@@ -25,6 +27,8 @@ public class HomeController {
 	private SqlSession sqlSession;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private ContentService contentService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(SearchCriteria criteria, Locale locale, Model model) {
@@ -34,6 +38,9 @@ public class HomeController {
 		model.addAttribute("recommend", order_recommend);
 		List<Board> order_date = boardService.order_date();
 		model.addAttribute("order_date", order_date);
+		
+		List<Navertv> content = contentService.naverParsing();
+		model.addAttribute("content", content);
 		
 		return "home";
 	}

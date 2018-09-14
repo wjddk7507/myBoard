@@ -86,8 +86,9 @@ html.open #sidebar {
 	transition: all 0.2s;
 }
 .container{
-	margin-left:100px;
+	margin:auto;
 }
+/*추천 콘텐츠*/
 #tv-wrapper{
 	background-color:#F2F2F2; 
 	text-align:center; 
@@ -97,20 +98,32 @@ html.open #sidebar {
 }
 #tv{
 	display:inline-block; 
-	width:400px; 
-	height:230px;
+	width:340px; 
+	height:210px;
 	border:1px solid black;
-	margin: 35px 20px auto 20px;
+	margin: 45px 20px auto 20px;
 }
 #profile-img{
 	width:30px;
 	height:30px;
 	border-radius:15px; /*반지금 25픽셀의 원이 만들어짐*/
 }
+#tv_contents{
+	width:340px; 
+	height:210px;
+	position:absolute; 
+	left:0px; 
+	top:0px; 
+	opacity:0;
+}
+.tv-img{
+	width:340px; 
+	height:210px;
+	
+}
  /*인기 게시판, 새로 생긴 게시판*/
  #board-main{
 	width:100%;
-	max-width:600px;
 	height:250px;
 	padding:20px;
  }	
