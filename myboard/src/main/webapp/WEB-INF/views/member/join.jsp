@@ -2,63 +2,62 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
 
-<section class="content">
+<div class="form-group">
 	<!-- 회원가입 -->
 	<!-- method와 enctype은 파일을 업로드하기 위해서 설정 
 	파일이 업로드되는 폼은 반드시l method는 post로 enctype은 multipart/form-data로 설정
 	onsubmit에 함수를 연결한 것은 폼의 데이터를 전송할 때 유효성 검사를 하기 위해서이다 -->
-	<form id="registerform" enctype="multipart/form-data" method="post" onsubmit="return check()">
-		<p align="center">
-		<table border="1" width="50%" height="80%" align='center'>
-			<tr>
-				<td colspan="3" align="center"><h2>회원 가입</h2></td>
-			</tr>
-			<tr>
-				<td rowspan="5" align="center">						<p></p>
-				<img id="img" width="100" height="100" border="1" /> <br />
-				<br /> <input type='file' id="profile_img" name="profile_img" /><br /></td>
-			</tr>
 
-			<tr>
-				<td bgcolor="#f5f5f5"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;이메일</font></td>
-				<td>&nbsp;&nbsp;&nbsp; 
-				<!-- onblur는 포커스가 떠날때 confirmId()를 호출해서 email 중복 검사를 수행 -->
-				<input type="email" name="id" id="id" size="30" maxlength=50 onblur="confirmId()" required="required" />
-					<div id="idDiv"></div>
-				</td>
-			</tr>
-						<tr>
-				<td bgcolor="#f5f5f5"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호</font></td>
-				<td>&nbsp;&nbsp;&nbsp; 
-					<input type="password" name="pw" id="pw" size="20" required="required" />
-				</td>
-			</tr>
-			<tr>
-				<td bgcolor="#f5f5f5"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호 확인</font></td>
-				<td>&nbsp;&nbsp;&nbsp; 
-					<input type="password" id="pwconfirm" size="20" required="required" />
-				</td>
-			</tr>
-			<tr>
-				<td width="17%" bgcolor="#f5f5f5"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;이름</font></td>
-				<td>&nbsp;&nbsp;&nbsp; 
-					<!-- html5의 pattern 속성을 이용해서 정규식 검사 수행 (알파벳, 한글, 2자 이상) -->
-					<input type="text" name="nickname" size="20" pattern="([a-z, A-Z, 가-힣]){2,}" required="required" title="닉네임은 문자 2자 이상입니다." />
-				</td>
-			</tr>
-			<tr>
-				<td align="center" colspan="3">
-					<p></p> 
-					<input type="submit" value="회원가입" class="btn btn-warning" />
-					<input type="button" value="메인으로" class="btn btn-success" onclick="javascript:window.location='../'">
-					<p></p>
-				</td>
-			</tr>
-		</table>
-	</form>
+<h2 style="text-align:center">회원가입</h2>
+<form  id="registerform" enctype="multipart/form-data" method="post" onsubmit="return check()" style="width:600px; margin:0 auto;">
+  <div class="form-row">
+  
+    <div class="form-group col-md-6">
+      <label for="id">이메일</label>
+      <input type="email" class="form-control" name="id" id="id" maxlength=50 onblur="confirmId()" required="required" placeholder="Email">
+    </div>
+    
+    <div class="form-group col-md-6">
+    	<!-- html5의 pattern 속성을 이용해서 정규식 검사 수행 (알파벳, 한글, 2자 이상) -->
+      	<label for="nickname">이름</label>
+      	<input type="text" class="form-control" id="nickname" name="nickname" placeholder="nickname" pattern="([a-z, A-Z, 가-힣]){2,}" required="required" title="닉네임은 문자 2자 이상입니다.">
+    	</div>
+ 	</div>
+ 	
+ 	<div class="form-group">
+    	<label for="pw">비밀번호</label>
+    	<input type="password" class="form-control" name="pw" id="pw" required="required" placeholder="password">
+ 	</div>
+ 	
+ 	<div class="form-group">
+    <label for="pwconfirm">비밀번호 확인</label>
+    <input type="password" id="pwconfirm" required="required" class="form-control" placeholder="confirm password">
+	</div>
+	
+	<div class="form-group" style="text-align:center; margin-top:20px;">
+		<img id="img" width="150px" height="150px" border="1"  class="rounded mx-auto d-block">
+	 	<div class="input-group mb-3" style="margin-top:20px">
+			<div class="custom-file">
+		    	<input type="file" class="custom-file-input" id="profile_img" name="profile_img" />
+		    	<label class="custom-file-label" for="profile_img" aria-describedby="profile_img" id="img_label">Choose file</label>
+		 	</div>
+		</div>
+ 	</div>
+ 	
+ 	
+ 	
+  <div class="form-group" style="text-align:center">
+ 	<button type="submit" class="btn btn-primary">회원가입</button>
+  	<button type="submit" class="btn btn-success" onclick="javascript:window.location='../'">메인으로</button>
+  </div>
+  
+</form>
+
+
 	<br />
 	<br />
-</section>
+	
+</div>
 
 <script>
 // 이메일 중복 검사 통과 여부를 저장할 변수

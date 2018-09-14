@@ -20,4 +20,12 @@ public class ReplyDao {
 	public List<Reply> list(int board_num){
 		return sqlSession.selectList("reply.list", board_num);
 	}
+	
+	public int delete(int reply_num) {
+		return sqlSession.delete("reply.delete", reply_num);
+	}
+	
+	public int update(Reply reply) {
+		return sqlSession.update("reply.update", reply);
+	}
 }

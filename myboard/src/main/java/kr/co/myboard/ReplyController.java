@@ -32,4 +32,20 @@ public class ReplyController {
 	public List<Reply> list(HttpServletRequest request){
 		return replyService.list(request);
 	}
+	
+	@RequestMapping(value="reply/delete", method=RequestMethod.GET)
+	public Map<String, Object> delete(HttpServletRequest request){
+		boolean result = replyService.delete(request);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		return map;
+	}
+
+	@RequestMapping(value="reply/update", method=RequestMethod.GET)
+	public Map<String, Object> update(HttpServletRequest request){
+		boolean result = replyService.update(request);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		return map;
+	}
 }

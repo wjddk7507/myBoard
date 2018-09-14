@@ -48,5 +48,32 @@ public class ReplyServiceImpl implements ReplyService {
 		list = replyDao.list(Integer.parseInt(board_num));
 		return list;
 	}
+
+	@Override
+	public boolean delete(HttpServletRequest request) {
+		boolean result = false;
+		String reply_num = request.getParameter("reply_num");
+		int r = replyDao.delete(Integer.parseInt(reply_num));
+		if(r>0) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean update(HttpServletRequest request) {
+		boolean result = false;		
+		String reply_num = request.getParameter("reply_num");
+		String reply_content = request.getParameter("reply_content");
+		
+		Reply reply = new Reply();
+		reply.setReply_num(Integer.parseInt(reply_num));
+		reply.setReply_content(reply_content);
+		
+		int r = replyDao.update(reply);
+		if(r>0) result = true;
+		
+		return result;
+	}
 	
 }

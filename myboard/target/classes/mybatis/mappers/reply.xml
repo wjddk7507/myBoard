@@ -14,5 +14,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" parameterType="java.lang.Integer" resultType="Reply">
 		select * from myreply where board_num=#{board_num}
 	</select>
-
+	
+	<!-- 댓글 삭제하기 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from myreply where reply_num = #{reply_num}
+	</delete>
+	
+	<!-- 댓글 수정하기 -->
+	<update id="update" parameterType="Reply">
+		update myreply 
+		set reply_content=#{reply_content}, write_date=sysdate
+		where reply_num=#{reply_num}
+	</update>
 </mapper>

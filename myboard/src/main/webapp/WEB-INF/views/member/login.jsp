@@ -14,15 +14,15 @@
 			<div class="col-md-4">
 				<div class="login-box well">
 					<form accept-charset="UTF-8" role="form" method="post" action="login">
-						<legend>로그인</legend>
+						<legend>Login</legend>
 						<div style='color: red'>${msg}</div>
 						<div class="form-group">
 							<label for="username-email">이메일</label> 
-							<input type="email" name="id" id="id" required="required" placeholder="이메일을 입력하세요" class="form-control" />
+							<input type="email" name="id" id="id" required="required" placeholder="Enter email" class="form-control" />
 						</div>
 						<div class="form-group">
 							<label for="password">비밀번호</label> 
-							<input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요" class="form-control" />
+							<input type="password" name="pw" id="pw" placeholder="password" class="form-control" />
 						</div>
 						<div class="form-group">
 							<input type="submit" class="btn btn-primary btn-login-submit btn-block m-t-md" value="로그인" />
@@ -40,5 +40,6 @@
 			<div class="col-md-4"></div>
 		</div>
 	</div>
+
 </body>
 </html>

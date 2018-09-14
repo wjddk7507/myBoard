@@ -103,9 +103,9 @@ html.open #sidebar {
 	margin: 35px 20px auto 20px;
 }
 #profile-img{
-	width:50px;
-	height:50px;
-	border-radius:25px; /*반지금 25픽셀의 원이 만들어짐*/
+	width:30px;
+	height:30px;
+	border-radius:15px; /*반지금 25픽셀의 원이 만들어짐*/
 }
  /*인기 게시판, 새로 생긴 게시판*/
  #board-main{

@@ -8,12 +8,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>목록보기</title>
 </head>
+
+<style>
+.table th {
+	text-align: center;
+}
+</style>
+
 <body>
 	<%@include file="../include/header.jsp"%>
 	<div class="box container">
 		<div class="box-header with-border">
 			<c:if test="${msg == null}">
-				<h3 class="box-title">게시판 목록보기</h3>
+				<h3 class="box-title">게시판</h3>
 			</c:if>
 			<c:if test="${msg != null}">
 				<h3 class="box-title">${msg}</h3>
@@ -34,34 +41,43 @@
 		//-->
 		
 		<div class="box-body">
-			<table class="table table-bordered table-hover">
-				<tr>
-					<th width="11%">글번호</th>
-					<th width="46%">제목</th>
-					<th width="16%">작성자</th>
-					<th width="16%">작성일</th>
-					<th width="11%">조회수</th>
-				</tr>
-				<c:forEach var="vo" items="${map.list }">
-					<tr>
-						<td align="right">${vo.board_num}&nbsp;</td>
-						<td>&nbsp; 
-							<a href='detail?board_num=${vo.board_num}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.criteria.searchType}&keyword=${map.criteria.keyword}'>${vo.board_title}</a>
-							<span class="badge badge-danger">${vo.replycnt}</span>
-							<c:if test="${vo.replycnt > 0}">
-								<img src="../resources/hot.png" width="25" height="25" />
-							</c:if>
-						</td>
-						<td>
-							<img src="${pageContext.request.contextPath}/profile/${vo.profile_img}" id="profile-img">
-							&nbsp;${vo.nickname}
-						</td>
-						<td>&nbsp; ${vo.dispDate}</td>
-						<td align="right">
-							<span class="badge bg-blue">${vo.board_cnt}</span>&nbsp;
-						</td>
+			<table class="table table-hover table-sm">
+				<thead>
+					<tr class>
+						<th width="10%">글번호</th>
+						<th width="44%">제목</th>
+						<th width="16%">작성자</th>
+						<th width="16%">작성일</th>
+						<th width="7%">조회수</th>
+						<th width="7%">북마크</th>
 					</tr>
-				</c:forEach>
+				</thead>
+				<tbody>
+					<c:forEach var="board" items="${map.list }">
+						<tr>
+							<td align="center">${board.board_num}&nbsp;</td>
+							<td>&nbsp; 
+								<a href='detail?board_num=${board.board_num}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.criteria.searchType}&keyword=${map.criteria.keyword}'>${board.board_title}</a>
+								<span class="badge badge-info">${board.replycnt}</span>
+								<c:if test="${board.replycnt > 0}">
+									<img src="../resources/hot.png" width="23" height="23" />
+								</c:if>
+							</td>
+							<td>
+								<img src="${pageContext.request.contextPath}/profile/${board.profile_img}" id="profile-img">
+								&nbsp;${board.nickname}
+							</td>
+							<td>&nbsp; ${board.write_date}</td>
+							<td align="center">
+								<span class="badge bg-blue">${board.board_cnt}</span>&nbsp;
+							</td>
+							<td align="center">
+								<span class="badge bg-blue">${board.board_recommend}</span>&nbsp;
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				
 			</table>
 		</div>
 		
@@ -145,9 +161,4 @@
 		</div>
 	</div>
 </body>
-<style>
-.table th {
-	text-align: center;
-}
-</style>
 </html>

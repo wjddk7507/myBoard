@@ -219,6 +219,76 @@ function display(data){
 	//출력 영역에 출력
 	document.getElementById("replydisp").innerHTML = disp;
 }
+
+//댓글 삭제를 눌렀을 때 호출될 함수
+function del(btn){
+	//댓글 번호 가져오기
+	id = btn.id;
+	//댓글번호 만들기 - 앞의 3글자 제외한 부분
+	reply_num = id.substr(3);
+	//삭제를 위한 대화상자를 출력
+	$('#dialog-confirm').dialog({
+		resizable:false,
+		height:'auto',
+		width:400,
+		modal:true,
+		buttons:{
+			"삭제":function(){
+				$(this).dialog("close");
+				
+				$.ajax({
+					url:"../reply/delete",
+					data:{"reply_num": reply_num},
+					dataType:"json",
+					success:function(data){
+						getReply();
+					}
+				});
+				
+			},
+			"취소":function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+}
+
+
+//댓글 수정 버튼을 눌렀을 때 수행할 내용
+function mod(btn){
+	id = btn.id;
+	reply_num = id.substr(3);
+	
+	$('#replyform').dialog({
+		resizable:false,
+		height:'auto',
+		width:400,
+		model:true,
+		buttons:{
+			"수정":function(){
+				$(this).dialog("close");
+				//입력한 내용 가져오기
+				reply_content = document.getElementById("reply_content").value;
+				$.ajax({
+					url:"../reply/update",
+					data:{
+						"reply_content": reply_content,
+						"reply_num": reply_num
+					},
+					dataType:"json",
+					success:function(data){
+						//댓글을 출력하는 함수를 호출
+						getReply();
+					}
+				});
+			},
+			"취소":function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+}
 </script>
 </body>
 </html>
