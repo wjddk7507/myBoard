@@ -42,6 +42,9 @@
 			</div>
 		</div>
 		
+		<div class="box-body">
+			
+		</div>
 		<button class="btn btn-info" id="replyadd">댓글작성</button>
 		<!-- 댓글 작성 및 수정 대화상자 영역 -->
 		<div class="box-body" style="display:none" id="replyform">
@@ -122,7 +125,7 @@
 		
 	</script>
 	
-	<c:if test="${user.email == vo.email}">
+	<c:if test="${member.id == board.id}">
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -132,7 +135,7 @@
 	</div>
 	<script>
 		document.getElementById("deleteBtn").addEventListener("click", function(){
-			$("#dialog-confirm").dialog({
+			$('#dialog-confirm').dialog({
 			      resizable: false,
 			      height: "auto",
 			      width: 400,

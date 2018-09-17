@@ -31,7 +31,6 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
     height:150px;
     width:100%;
 	background-color:white;
-	border:1px dashed black;
 }
 #head {
     height:65px;
@@ -42,7 +41,7 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
     left:0px;
 	padding:0;
     background-color:white;
-    border-bottom:1px solid black;
+    border-bottom:1px solid #F2F2F2;
 }
 #left_menu {
 	display:flex;
@@ -54,7 +53,7 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 	font-size:12px;
 	position:fixed;
 	float:left;
-	top:151px;
+	top:68px;
 	left:0;
 	bottom:0;
 	padding:0;
@@ -63,7 +62,7 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 	overflow-y:auto;
 	z-index:100;
     background-color:white;
-	border:1px dashed black;
+    /*border-right : 1px solid #F2F2F2;*/
 	-webkit-transform: translate3d(-300px,0,0);
 	-moz-transform: translate3d(-300px,0,0);
 	transform: translate3d(-300px,0,0);
@@ -100,7 +99,6 @@ html.open #sidebar {
 	display:inline-block; 
 	width:340px; 
 	height:210px;
-	border:1px solid black;
 	margin: 45px 20px auto 20px;
 }
 #profile-img{
@@ -141,18 +139,31 @@ html.open #sidebar {
 <body>
 <div id="wrap">
 	<div id="head" class="wrapper">
-		<div id="left_menu" style=" border:1px dashed black">
-			<button class="navbar-toggler" type="button" id="menuBtn">메뉴</button> 
-			<a href="${pageContext.request.contextPath}" style="color:#dda0dd">MyBoard</a>
-			<a class="item" href="${pageContext.request.contextPath}/board/list">Board List</a> 
+		<div id="left_menu">
+			<button class="btn btn-link" type="button" id="menuBtn" aria-label="Left Align">
+				<img src="${pageContext.request.contextPath}/resources/menu.png">
+			</button> 
+			<button type="button" class="btn btn-link">
+				<a href="${pageContext.request.contextPath}" style="color:#dda0dd">MyBoard</a>
+			</button>
+			<button type="button" class="btn btn-link">
+				<a class="item" href="${pageContext.request.contextPath}/board/list" style="color:black">Board List</a> 
+			</button>
 			
 			<c:if test="${member==null}">
-				<a class="ui item" href="${pageContext.request.contextPath}/member/login">Login</a>
-				<a class="ui item" href="${pageContext.request.contextPath}/member/join">Join</a>
+				<button type="button" class="btn btn-link">
+					<a class="ui item" href="${pageContext.request.contextPath}/member/login" style="color:black">Login</a>
+				</button>
+				<button type="button" class="btn btn-link">
+					<a class="ui item" href="${pageContext.request.contextPath}/member/join" style="color:black">Join</a>
+				</button>
 			</c:if>
 			<c:if test="${member!=null}">
-				<a class="ui item" href="${pageContext.request.contextPath}/member/logout">Logout</a>
+				<button type="button" class="btn btn-link">
+					<a class="ui item" href="${pageContext.request.contextPath}/member/logout" style="color:black">Logout</a>
+				</button>
 			</c:if>
+			
 		
 		</div>
 		   
@@ -160,10 +171,14 @@ html.open #sidebar {
 </div>	
 
 <div class="sidebar" id="sidebar">
-	<a class="item"href="${pageContext.request.contextPath}/board/register">Board 만들기</a> 
-	
-	<br/>
-	<a href="${pageContext.request.contextPath}/member/sendmail?id=wjddk7507@naver.com">wjddk7507@naver.com</a>	
+	<div class="list-group">
+		<a href="${pageContext.request.contextPath}" class="list-group-item list-group-item-action">HOME</a>
+		<a href="${pageContext.request.contextPath}/board/register" class="list-group-item list-group-item-action">Board 만들기</a>
+		<a href="#" class="list-group-item list-group-item-action">Top10</a>
+		<a href="${pageContext.request.contextPath}/member/sendmail?id=wjddk7507@naver.com" class="list-group-item list-group-item-action">
+			&nbsp<br/>문의 메일 보내기<br/>wjddk7507@naver.com<br/>&nbsp
+		</a>
+	</div>
 </div>
 	
  <script>
