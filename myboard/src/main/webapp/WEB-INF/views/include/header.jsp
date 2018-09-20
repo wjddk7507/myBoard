@@ -128,12 +128,12 @@ html.open #sidebar {
  #board-left{
  	float:left;
  	width:50%;
-	max-width:250px;
+	max-width:400px;
  }
 #board-right{
  	float:right;
  	width:50%;
-	max-width:250px;
+	max-width:400px;
  }
 </style>
 <body>
@@ -174,7 +174,7 @@ html.open #sidebar {
 	<div class="list-group">
 		<a href="${pageContext.request.contextPath}" class="list-group-item list-group-item-action">HOME</a>
 		<a href="${pageContext.request.contextPath}/board/register" class="list-group-item list-group-item-action">Board 만들기</a>
-		<a href="#" class="list-group-item list-group-item-action">Top10</a>
+		<a href="${pageContext.request.contextPath}/board/toplist" class="list-group-item list-group-item-action">Top30</a>
 		<a href="${pageContext.request.contextPath}/member/sendmail?id=wjddk7507@naver.com" class="list-group-item list-group-item-action">
 			&nbsp<br/>문의 메일 보내기<br/>wjddk7507@naver.com<br/>&nbsp
 		</a>

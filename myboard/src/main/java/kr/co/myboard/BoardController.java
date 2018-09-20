@@ -1,10 +1,12 @@
 package kr.co.myboard;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,14 @@ import kr.co.myboard.domain.Board;
 import kr.co.myboard.domain.Criteria;
 import kr.co.myboard.domain.SearchCriteria;
 import kr.co.myboard.service.BoardService;
+import kr.co.myboard.service.BookmarkService;
 
 @Controller
 public class BoardController {
 	@Autowired
-	private BoardService boardService;
+	private BoardService boardService;	
+	@Autowired
+	private BookmarkService bookmarkService;
 	
 	@RequestMapping(value="board/register", method=RequestMethod.GET)
 	public String register(Model model) {
@@ -42,11 +47,24 @@ public class BoardController {
 		return "board/list";
 	}
 	@RequestMapping(value="board/detail", method=RequestMethod.GET)
-	public String detail(Criteria criteria, HttpServletRequest request, Model model) {
+	public String detail(Criteria criteria, HttpServletRequest request, Model model, HttpSession session) {
 		Board board = boardService.detail(request);
 		model.addAttribute("board", board);
+		
+		String check="false";
+		String id = session.getAttribute("member").toString().split(",")[0].substring(11);
+		//id.split(",")[0].substring(11));
+		List<String> list = new ArrayList<String>();
+		list = bookmarkService.bookmarkCheck(request);
+		
+		for(String r : list) {
+			if(r.equals(id)) check="true";
+		}
+		model.addAttribute("check", check);
+		
 		return "board/detail";
 	}
+	
 	@RequestMapping(value="board/update", method=RequestMethod.GET)
 	public String updateView(Criteria criteria, HttpServletRequest request, Model model) {
 		Board board = boardService.updateView(request);
@@ -64,5 +82,11 @@ public class BoardController {
 		boardService.delete(request);
 		attr.addFlashAttribute("msg", "게시글 삭제 성공");
 		return "redirect:list?page="+criteria.getPage()+"&perPageNum="+criteria.getPerPageNum();
+	}
+	@RequestMapping(value="board/toplist", method=RequestMethod.GET)
+	public String toplist(SearchCriteria criteria, Model model) {
+		List<Board> order_recommend = boardService.order_recommend();
+		model.addAttribute("order_recommend", order_recommend);
+		return "board/toplist";
 	}
 }

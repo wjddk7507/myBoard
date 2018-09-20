@@ -5,7 +5,7 @@
 
 <div id="container">
 
-	<div style="width:800px; margin:auto;">
+	<div style="width:1000px; margin:auto;">
 		<!-- 인기 게시판 -->
 		<div id="board-main">
 			<div id="board-left">
@@ -28,8 +28,10 @@
 			</div>
 		</div>
 	</div>	
+	<br/>	
+	<br/>
 	<!-- 네이버 tv 캐스트 -->
-	추천 콘텐츠
+	<h3>추천 주제!</h3> - 네이버tv캐스트 1~4위
 	<div id="tv-wrapper">	
 		<div style="width:1800px;margin:auto;">		
 			<ul style="list-style:none">

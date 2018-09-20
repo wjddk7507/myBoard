@@ -12,14 +12,17 @@
 	<div class="container">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">상세보기</h3>
+				<button type="button" id="bookmarkBtn" class="btn btn-link">
+				<c:if test="${check==true}">
+					<img id="bookmarkImg" src="${pageContext.request.contextPath}/resources/bookmark.png" style="width:25px;height:25px"/>
+				</c:if>	
+				<c:if test="${check==false}">
+					<img id="bookmarkImg" src="${pageContext.request.contextPath}/resources/bookmark_t.png" style="width:25px;height:25px"/>
+				</c:if>	
+				</button>
+				<span style="font-size:20px;font-weight:bold">${board.board_title}</p>
 			</div>
-
 			<div class="box-body">
-				<div class="form-group">
-					<label>제목</label> <input type="text" name="board_title"
-						class="form-control" value="${board.board_title}" readonly="readonly" />
-				</div>
 				<div class="form-group">
 					<label>내용</label>
 					<textarea name="board_content" rows="5" readonly="readonly"
@@ -47,7 +50,7 @@
 		</div>
 		<button class="btn btn-info" id="replyadd">댓글작성</button>
 		<!-- 댓글 작성 및 수정 대화상자 영역 -->
-		<div class="box-body" style="display:none" id="replyform">
+		<div class="box-body" style="display:none" id="replyform" class="replyform">
 			<label for="nickname">작성자</label>
 			<input class="form-control" type="text" id="nickname" value="${member.nickname}" readonly="readonly" />
 			<label for="reply_content">댓글내용</label>
@@ -84,11 +87,49 @@
 				});
 		</c:if>
 		
+		bookmarkImg=document.getElementById("bookmarkImg");
+		
+		// 북마크 버튼 눌렀을 때
+		document.getElementById("bookmarkBtn").addEventListener("click", function(){
+			if(bookmarkImg.src=="http://localhost:9000/myboard/resources/bookmark_t.png"){
+				// 북마크에 추가
+				bookmark=false;
+				bookmarkImg.src ="${pageContext.request.contextPath}/resources/bookmark.png";
+				$.ajax({
+					url:"../bookmark/register",
+					data:{
+						"board_num":'${board.board_num}',
+						"board_title":'${board_title}',
+						"id":'${member.id}',
+						"nickname":'${member.nickname}'
+					},
+					dataType:"json",
+					success:function(data){
+						alert("북마크에 추가되었습니다");
+					}
+				});
+			}else{
+				// 북마크에서 삭제
+				bookmark=true;
+				bookmarkImg.src ="${pageContext.request.contextPath}/resources/bookmark_t.png";
+				$.ajax({
+					url:"../bookmark/delete",
+					data:{
+						"board_num":'${board.board_num}',
+						"id":'${member.id}'
+					},
+					dataType:"json",
+					success:function(data){
+						alert("북마크에서 해지되었습니다");	
+					}
+				});
+			}
+			
+		})
 		
 		
 		//댓글 작성 버튼을 눌렀을 때 수행할 내용
-		document.getElementById("replyadd").addEventListener(
-			"click", function(){
+		document.getElementById("replyadd").addEventListener("click", function(){
 			$('#replyform').dialog({
 				resizable:false,
 				height:'auto',

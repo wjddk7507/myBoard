@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 추천 순으로 조회 -->
 	<select id="order_recommend" resultType="Board">
-		select * from myboard order by board_recommend
+		select * from myboard order by board_recommend desc
 	</select>
 	
 	<!-- 날짜 순으로 조회 -->

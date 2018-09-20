@@ -59,7 +59,7 @@
 							<td>&nbsp; 
 								<a href='detail?board_num=${board.board_num}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.criteria.searchType}&keyword=${map.criteria.keyword}'>${board.board_title}</a>
 								<span class="badge badge-info">${board.replycnt}</span>
-								<c:if test="${board.replycnt > 0}">
+								<c:if test="${board.board_cnt > 5}">
 									<img src="../resources/hot.png" width="23" height="23" />
 								</c:if>
 							</td>
@@ -124,7 +124,6 @@
 			 document.getElementById("searchBtn").addEventListener("click", function(){
 					// select의 선택된 항목 찾기
 					// 선택된 행 번호 가져오기
-					alert("zz");
 					var x = document.getElementById("searchType").selectedIndex;
 					// select의 모든 값을 배열로 가져오기
 					var y = document.getElementById("searchType").options;
