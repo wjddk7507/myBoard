@@ -24,7 +24,6 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 <!-- jQuery 2.1.4 -->
 <script	src="${pageContext.request.contextPath}/resources/jquery/jquery.min.js"></script>
 
-
 </head>
 <style>
 #wrap{

@@ -10,6 +10,8 @@
 
 <h2 style="text-align:center">회원가입</h2>
 <form  id="registerform" enctype="multipart/form-data" method="post" onsubmit="return check()" style="width:600px; margin:0 auto;">
+  
+  <div id="idDiv"></div>
   <div class="form-row">
   
     <div class="form-group col-md-6">
@@ -62,17 +64,16 @@
 <script>
 // 이메일 중복 검사 통과 여부를 저장할 변수
 // 전송버튼을 눌렀을 때 이 값이 false 이면 전송하지 않는다
-var idcheck = false;
+var idcheck = true;
 
 // email 중복 체크를 위한 함수
 function confirmId(){
 	// email에 입력된 값 가져오기
 	val = document.getElementById("id").value;
 	idDiv = document.getElementById("idDiv");
-	
 	$.ajax({
 		// member/join 위치에서 요청을 하기때문에
-		url:'idCheck',
+		url:'../idCheck',
 		// ? 뒤에 오는 값!!
 		data:{'id':val},
 		dataType:'json',

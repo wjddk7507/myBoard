@@ -19,12 +19,15 @@
 	<%@include file="../include/header.jsp"%>
 	<div class="box container">
 		<div class="box-header with-border">
+				<h3 class="box-title">게시판</h3>
+			<!-- 
 			<c:if test="${msg == null}">
 				<h3 class="box-title">게시판</h3>
 			</c:if>
 			<c:if test="${msg != null}">
 				<h3 class="box-title">${msg}</h3>
 			</c:if>
+			//-->
 		</div>
 		
 		<!-- 출력할 데이터 개수를 설정하는 select -->

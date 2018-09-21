@@ -67,6 +67,11 @@
 		
 	</div>
 	</section>
+		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+
 	<script>
 		//메인 버튼을 눌렀을 때 처리
 		document.getElementById("mainBtn").addEventListener("click",function() {
@@ -132,7 +137,7 @@
 		document.getElementById("replyadd").addEventListener("click", function(){
 			$('#replyform').dialog({
 				resizable:false,
-				height:'auto',
+				height:"auto",
 				width:400,
 				model:true,
 				buttons:{
@@ -166,11 +171,8 @@
 		
 	</script>
 	
-	<c:if test="${member.id == board.id}">
-	<link rel="stylesheet"
-		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+<c:if test="${member.id == board.id}">	
+
 	<div id="dialog-confirm" title="정말로 삭제?" style="display: none">
 		<p>삭제하시면 복구할 수 없습니다. 그래도 삭제하실 건가요?</p>
 	</div>
@@ -192,8 +194,7 @@
 			      }
 			    });
 		})
-	</script>
-	
+	</script>	
 </c:if>
 
 
@@ -203,15 +204,12 @@
 id = "${member.id}";
 
 //댓글 읽기 버튼을 눌렀을 때의 동작
-<c:if test="${board.replycnt > 0}">
-	document.getElementById("replylist").addEventListener(
-		"click", function(){
-		
+<c:if test="${board.replycnt>0}">
+	document.getElementById("replylist").addEventListener("click", function(){
 		//함수를 호출
 		//댓글 저장이나 수정 및 삭제 후에도 호출할 것이므로
 		//별도의 함수로 만드는 것이 코딩양을 줄이기 때문입니다.
-		getReply();
-			
+		getReply();			
 	});
 </c:if>
 
