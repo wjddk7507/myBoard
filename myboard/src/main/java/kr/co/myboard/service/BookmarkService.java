@@ -10,4 +10,5 @@ public interface BookmarkService {
 	public boolean register(HttpServletRequest request);
 	public boolean delete(HttpServletRequest request);
 	public List<String> bookmarkCheck(HttpServletRequest request);
+	public List<Bookmark> bookmarkList(String id);
 }

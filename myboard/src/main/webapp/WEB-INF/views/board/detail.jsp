@@ -104,7 +104,7 @@
 					url:"../bookmark/register",
 					data:{
 						"board_num":'${board.board_num}',
-						"board_title":'${board_title}',
+						"board_title":'${board.board_title}',
 						"id":'${member.id}',
 						"nickname":'${member.nickname}'
 					},

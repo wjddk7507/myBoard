@@ -30,4 +30,7 @@ public class BookmarkDao {
 	public void updateMCnt(int board_num) {
 		sqlSession.update("bookmark.updateMCnt", board_num);
 	}
+	public List<Bookmark> bookmarkList(String id){
+		return sqlSession.selectList("bookmark.bookmarkList",id);
+	}
 }

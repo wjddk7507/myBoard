@@ -19,6 +19,8 @@ public class BookmarkController {
 
 	@RequestMapping(value="bookmark/register", method=RequestMethod.GET)
 	public boolean register(HttpServletRequest request){
+		System.out.println(request.getParameter("board_title"));
+		System.out.println(request.getParameter("board_num"));
 		boolean result = bookmarkService.register(request);
 		return result;
 	}

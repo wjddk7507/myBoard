@@ -132,6 +132,27 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> order_recommend() {
 		List<Board> order_recommend = boardDao.order_recommend();
+		
+		// 오늘 날짜에 작성된 게시글은 시간, 이전에 작성된 게시글은 날짜 출력
+		// 오늘 날짜 만들기
+		Calendar cal = Calendar.getInstance();
+		Date today = new Date(cal.getTimeInMillis());
+		// list의 데이터들을 확인해서 날짜와 시간을 저장
+		for(Board board : order_recommend) {
+			// 각 보드의 댓글 개수 가져와서 저장하기
+			int replycnt = boardDao.replycnt(board.getBoard_num());
+			board.setReplycnt(replycnt);
+			
+			// 작성한 날짜 가져오기
+			String write_date = board.getWrite_date().substring(0, 10);
+			if(today.toString().equals(write_date)) {
+				// 시간을 저장
+				board.setWrite_date(board.getWrite_date().substring(11, 16));
+			}else {
+				board.setWrite_date(write_date);
+			}
+		}
+		
 		return order_recommend;
 	}
 

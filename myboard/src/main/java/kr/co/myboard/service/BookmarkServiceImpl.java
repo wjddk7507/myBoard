@@ -1,5 +1,6 @@
 package kr.co.myboard.service;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 		List<String> list = new ArrayList<String>();
 		list = bookmarkDao.bookmarkCheck(Integer.parseInt(board_num));
 		
+		return list;
+	}
+
+	@Override
+	public List<Bookmark> bookmarkList(String id) {
+		List<Bookmark> list = new ArrayList<Bookmark>();
+		list = bookmarkDao.bookmarkList(id);
 		return list;
 	}
 	

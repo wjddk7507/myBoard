@@ -30,4 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update myboard set board_recommend=board_recommend-1 where board_num=#{board_num}
 	</update>
 	
+	<!-- id별로 북마크 조회 -->
+	<select id="bookmarkList" parameterType="java.lang.String" resultType="Bookmark">
+		select * from mybookmark where id=#{id}
+	</select>
+	
 </mapper>

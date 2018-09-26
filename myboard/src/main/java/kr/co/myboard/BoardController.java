@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.myboard.domain.Board;
+import kr.co.myboard.domain.Bookmark;
 import kr.co.myboard.domain.Criteria;
 import kr.co.myboard.domain.SearchCriteria;
 import kr.co.myboard.service.BoardService;
@@ -88,5 +89,15 @@ public class BoardController {
 		List<Board> order_recommend = boardService.order_recommend();
 		model.addAttribute("order_recommend", order_recommend);
 		return "board/toplist";
+	}
+	@RequestMapping(value="board/bookmark", method=RequestMethod.GET)
+	public String bookmark(Model model, HttpServletRequest request, HttpSession session) {
+		String id = session.getAttribute("member").toString().split(",")[0].substring(11);
+		List<Bookmark> bookmarkList = bookmarkService.bookmarkList(id);
+		model.addAttribute("bookmarkList", bookmarkList);
+		
+		System.out.println(bookmarkList.toString());
+		
+		return "board/bookmark";
 	}
 }

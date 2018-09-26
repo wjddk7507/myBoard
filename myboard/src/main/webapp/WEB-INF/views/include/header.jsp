@@ -172,8 +172,18 @@ html.open #sidebar {
 <div class="sidebar" id="sidebar">
 	<div class="list-group">
 		<a href="${pageContext.request.contextPath}" class="list-group-item list-group-item-action">HOME</a>
-		<a href="${pageContext.request.contextPath}/board/register" class="list-group-item list-group-item-action">Board 만들기</a>
 		<a href="${pageContext.request.contextPath}/board/toplist" class="list-group-item list-group-item-action">Top30</a>
+		
+		<c:if test="${member==null}">
+			<div class="list-group-item"><a href="${pageContext.request.contextPath}/member/login" >로그인</a>하시면 이용하실 수 있습니다</div>
+		</c:if>
+		<c:if test="${member!=null}">
+			<div class="list-group-item">${member.nickname}님 환영합니다</div>			
+			<a href="${pageContext.request.contextPath}/board/register" class="list-group-item list-group-item-action">Board 만들기</a>		
+			<a href="${pageContext.request.contextPath}/board/bookmark" class="list-group-item list-group-item-action">북마크한 보드 보기</a>	
+		</c:if>	
+		
+		
 		<a href="${pageContext.request.contextPath}/member/sendmail?id=wjddk7507@naver.com" class="list-group-item list-group-item-action">
 			&nbsp<br/>문의 메일 보내기<br/>wjddk7507@naver.com<br/>&nbsp
 		</a>
